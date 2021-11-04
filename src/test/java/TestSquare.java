@@ -43,11 +43,23 @@ public class TestSquare {
     }
 
     @Test
+    void testGetNearMines(){
+        assertEquals(square.getNearMines(), 0);
+    }
+
+    @Test
+    void testIncreaseNearMines(){
+        square.increaseNearMines();
+        assertEquals(square.getNearMines(), 1);
+    }
+
+    @Test
     void testConstructor(){
         Square squareConstruct = new Square(5,7);
         assertEquals(squareConstruct.getRow(), 5);
         assertEquals(squareConstruct.getCol(), 7);
         assertFalse(squareConstruct.isMine());
         assertFalse(squareConstruct.isOpen());
+        assertEquals(squareConstruct.getNearMines(), 0);
     }
 }

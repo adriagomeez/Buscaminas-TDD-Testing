@@ -4,12 +4,14 @@ public class Square {
     private int col;
     private boolean mine;
     private boolean open;
+    private int nearMines;
 
     public Square(int Row, int Col){
         row = Row;
         col = Col;
         mine = false;
         open = false;
+        nearMines = 0;
     }
 
     public int getRow(){
@@ -34,6 +36,14 @@ public class Square {
 
     public void setOpen(){
         open = true;
+    }
+
+    public int getNearMines() {
+        return nearMines;
+    }
+
+    public void increaseNearMines(){
+        nearMines++;
     }
 
 }
