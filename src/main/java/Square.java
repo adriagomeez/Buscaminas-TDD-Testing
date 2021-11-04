@@ -6,19 +6,34 @@ public class Square {
     private boolean open;
 
     public Square(int Row, int Col){
-
+        row = Row;
+        col = Col;
+        mine = false;
+        open = false;
     }
 
-    public int getRow();
+    public int getRow(){
+        return row;
+    }
 
-    public int getCol();
+    public int getCol(){
+        return col;
+    }
 
-    public boolean isMine();
+    public boolean isMine(){
+        return mine;
+    }
 
-    public boolean isOpen();
+    public boolean isOpen(){
+        return open;
+    }
 
-    public void setMine();
+    public void setMine(){
+        mine = true;
+    }
 
-    public void setOpen();
+    public void setOpen(){
+        open = true;
+    }
 
 }
