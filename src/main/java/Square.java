@@ -13,4 +13,12 @@ public class Square {
 
     public int getCol();
 
+    public boolean isMine();
+
+    public boolean isOpen();
+
+    public void setMine();
+
+    public void setOpen();
+
 }

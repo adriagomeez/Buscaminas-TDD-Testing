@@ -12,18 +12,42 @@ public class TestSquare {
 
     @Test
     void testGetRow(){
-        assertTrue(square.getRow() == 4);
+        assertEquals(square.getRow(), 4);
     }
 
     @Test
     void testGetCol(){
-        assertTrue(square.getCol() == 3);
+        assertEquals(square.getCol(), 3);
+    }
+
+    @Test
+    void testIsMine(){
+        assertFalse(square.isMine());
+    }
+
+    @Test
+    void testSetMine(){
+        square.setMine();
+        assertTrue(square.isMine());
+    }
+
+    @Test
+    void testIsOpen(){
+        assertFalse(square.isOpen());
+    }
+
+    @Test
+    void testSetOpen(){
+        square.setOpen();
+        assertTrue(square.isOpen());
     }
 
     @Test
     void testConstructor(){
         Square squareConstruct = new Square(5,7);
-        assertTrue(squareConstruct.getRow() == 5);
-        assertTrue(squareConstruct.getCol() == 7);
+        assertEquals(squareConstruct.getRow(), 5);
+        assertEquals(squareConstruct.getCol(), 7);
+        assertFalse(squareConstruct.isMine());
+        assertFalse(squareConstruct.isOpen());
     }
 }
