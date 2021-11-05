@@ -30,7 +30,12 @@ public class Board {
         return numMines;
     }
 
-    public Square getSquare();
+    public Square getSquare(int row, int col){
+        if( row >= 0 && row < numRows && col >= 0 && col <numCols)
+            return board[row][col];
+
+        return null;
+    }
 
     public void createBoard();
 
