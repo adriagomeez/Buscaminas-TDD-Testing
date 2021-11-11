@@ -39,7 +39,9 @@ public class Board {
 
     public void createBoard();
 
-    public void createMines(RandomNumber randomNumber);
+    public void createMines(RandomNumber randomNumber){
+
+    }
 
     public void setClues(int row, int col){
         for (int i = 0; i < 8; i++){

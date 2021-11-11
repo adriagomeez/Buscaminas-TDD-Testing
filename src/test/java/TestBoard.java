@@ -244,6 +244,30 @@ public class TestBoard {
         assertTrue(b.getSquare(0, 2).isMine());
     }
 
+    @Test
+    void testCreateMinesMinasRepetidas(){
+        Board b = new Board(4, 4, 3);
+        MockRandomNumber mockRandomNumber = new MockRandomNumber();
+        //mina 1
+        mockRandomNumber.setNum(1);
+        mockRandomNumber.setNum(1);
+        //mina 2
+        mockRandomNumber.setNum(2);
+        mockRandomNumber.setNum(1);
+        //mina repetida
+        mockRandomNumber.setNum(2);
+        mockRandomNumber.setNum(1);
+        //mina 3
+        mockRandomNumber.setNum(3);
+        mockRandomNumber.setNum(2);
+
+        b.createMines(mockRandomNumber);
+
+        assertTrue(b.getSquare(1, 1).isMine());
+        assertTrue(b.getSquare(2, 1).isMine());
+        assertTrue(b.getSquare(3, 2).isMine());
+    }
+
 
 
 }
