@@ -289,12 +289,19 @@ public class TestBoard {
         assertTrue(tablero.getSquare(4, 2).isOpen());
         assertTrue(tablero.getSquare(4, 3).isOpen());
         assertTrue(tablero.getSquare(4, 4).isOpen());
+        assertTrue(tablero.getSquare(4, 1).isOpen());
+        assertTrue(tablero.getSquare(3, 1).isOpen());
+        assertTrue(tablero.getSquare(3, 2).isOpen());
+        assertTrue(tablero.getSquare(3, 3).isOpen());
+        assertTrue(tablero.getSquare(3, 4).isOpen());
         //casillas frontera con las abiertas pero cerradas
-        assertFalse(tablero.getSquare(4, 1).isOpen());
-        assertFalse(tablero.getSquare(3, 1).isOpen());
-        assertFalse(tablero.getSquare(3, 2).isOpen());
-        assertFalse(tablero.getSquare(3, 3).isOpen());
-        assertFalse(tablero.getSquare(3, 4).isOpen());
+        assertFalse(tablero.getSquare(4, 0).isOpen());
+        assertFalse(tablero.getSquare(3, 0).isOpen());
+        assertFalse(tablero.getSquare(2, 0).isOpen());
+        assertFalse(tablero.getSquare(2, 1).isOpen());
+        assertFalse(tablero.getSquare(2, 2).isOpen());
+        assertFalse(tablero.getSquare(2, 3).isOpen());
+        assertFalse(tablero.getSquare(2, 4).isOpen());
 
         //square 2
         resultado = tablero.selectSquare(0, 0);
@@ -377,16 +384,23 @@ public class TestBoard {
         //seleccionar misma casilla
         resultado = tablero.selectSquare(4, 3);
         assertFalse(resultado);
-        //casillas abiertas anteriormente siguen abiertas
+        //casillas abiertas siguen abiertas
         assertTrue(tablero.getSquare(4, 2).isOpen());
         assertTrue(tablero.getSquare(4, 3).isOpen());
         assertTrue(tablero.getSquare(4, 4).isOpen());
+        assertTrue(tablero.getSquare(4, 1).isOpen());
+        assertTrue(tablero.getSquare(3, 1).isOpen());
+        assertTrue(tablero.getSquare(3, 2).isOpen());
+        assertTrue(tablero.getSquare(3, 3).isOpen());
+        assertTrue(tablero.getSquare(3, 4).isOpen());
         //casillas frontera con las abiertas pero cerradas siguen cerradas
-        assertFalse(tablero.getSquare(4, 1).isOpen());
-        assertFalse(tablero.getSquare(3, 1).isOpen());
-        assertFalse(tablero.getSquare(3, 2).isOpen());
-        assertFalse(tablero.getSquare(3, 3).isOpen());
-        assertFalse(tablero.getSquare(3, 4).isOpen());
+        assertFalse(tablero.getSquare(4, 0).isOpen());
+        assertFalse(tablero.getSquare(3, 0).isOpen());
+        assertFalse(tablero.getSquare(2, 0).isOpen());
+        assertFalse(tablero.getSquare(2, 1).isOpen());
+        assertFalse(tablero.getSquare(2, 2).isOpen());
+        assertFalse(tablero.getSquare(2, 3).isOpen());
+        assertFalse(tablero.getSquare(2, 4).isOpen());
     }
 
     @Test
@@ -410,7 +424,7 @@ public class TestBoard {
         assertTrue(resultado);
         //casilla abierta
         assertTrue(tablero.getSquare(2, 2).isOpen());
-        //casillas frontera con las abiertas pero cerradas
+        //casillas frontera con la abierta pero cerradas
         assertFalse(tablero.getSquare(1, 1).isOpen());
         assertFalse(tablero.getSquare(1, 2).isOpen());
         assertFalse(tablero.getSquare(1, 3).isOpen());
