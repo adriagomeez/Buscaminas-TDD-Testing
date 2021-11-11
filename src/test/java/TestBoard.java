@@ -60,8 +60,149 @@ public class TestBoard {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"5, 5, 7, 5", "8, 3, 6, 4"})
-    void testSetCluesInterior(int row1, int col1, int row2, int col2){
-        board
+    @CsvSource(value = {"5, 5", "3, 5", "2, 4", "4, 3"})
+    void testSetCluesInterior(int row1, int col1){
+        board.setClues(row1, col1);
+        //casillas con pista
+        assertEquals(board.getSquare(row1-1, col1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1-1, col1+1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1, col1+1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1+1, col1+1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1+1, col1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1+1, col1-1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1, col1-1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1-1, col1-1).getNearMines(), 1);
+        //casillas sin pista
+        assertEquals(board.getSquare(row1+2, col1).getNearMines(), 0);
+        assertEquals(board.getSquare(row1, col1+2).getNearMines(), 0);
+        assertEquals(board.getSquare(row1, col1-2).getNearMines(), 0);
+        assertEquals(board.getSquare(row1-2, col1).getNearMines(), 0);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"5, 5", "3, 5"})
+    void testSetCluesDosMinas(int row1, int col1, int row2, int col2){
+        board.setClues(row1, col1);
+        //casillas con pista
+        assertEquals(board.getSquare(row1-1, col1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1-1, col1+1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1, col1+1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1+1, col1+1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1+1, col1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1+1, col1-1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1, col1-1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1-1, col1-1).getNearMines(), 1);
+        //casillas sin pista
+        assertEquals(board.getSquare(row1+2, col1).getNearMines(), 0);
+        assertEquals(board.getSquare(row1, col1+2).getNearMines(), 0);
+        assertEquals(board.getSquare(row1, col1-2).getNearMines(), 0);
+        assertEquals(board.getSquare(row1-2, col1).getNearMines(), 0);
+
+        board.setClues(row2, col2);
+        assertEquals(board.getSquare(row1-1, col1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1-1, col1+1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1, col1+1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1+1, col1+1).getNearMines(), 2);
+        assertEquals(board.getSquare(row1+1, col1).getNearMines(), 2);
+        assertEquals(board.getSquare(row1+1, col1-1).getNearMines(), 2);
+        assertEquals(board.getSquare(row1, col1-1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1-1, col1-1).getNearMines(), 1);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1, 0", "2, 0", "3, 0", "4, 0", "5, 0"})
+    void testSetCluesLeftBorder(int row1, int col1){
+        board.setClues(row1, col1);
+
+        assertEquals(board.getSquare(row1-1, col1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1-1, col1+1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1, col1+1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1+1, col1+1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1+1, col1).getNearMines(), 1);
+
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"0, 1", "0, 2", "0, 3", "0, 4", "0, 5", "0, 6"})
+    void testSetCluesTopBorder(int row1, int col1){
+        board.setClues(row1, col1);
+
+        assertEquals(board.getSquare(row1, col1+1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1+1, col1+1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1+1, col1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1+1, col1-1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1, col1-1).getNearMines(), 1);
+
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1, 7", "2, 7", "3, 7", "4, 7", "5, 7"})
+    void testSetCluesRightBorder(int row1, int col1){
+        board.setClues(row1, col1);
+
+        assertEquals(board.getSquare(row1-1, col1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1+1, col1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1+1, col1-1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1, col1-1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1-1, col1-1).getNearMines(), 1);
+
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"6, 1", "6, 2", "6, 3", "6, 4", "6, 5", "6, 6"})
+    void testSetCluesBottomBorder(int row1, int col1){
+        board.setClues(row1, col1);
+
+        assertEquals(board.getSquare(row1-1, col1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1-1, col1+1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1, col1+1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1, col1-1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1-1, col1-1).getNearMines(), 1);
+
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"0, 0"})
+    void testSetCluesTopLeftCorner(int row1, int col1){
+        board.setClues(row1, col1);
+
+        assertEquals(board.getSquare(row1, col1+1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1+1, col1+1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1+1, col1).getNearMines(), 1);
+
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"0, 7"})
+    void testSetCluesTopRightCorner(int row1, int col1){
+        board.setClues(row1, col1);
+
+        assertEquals(board.getSquare(row1+1, col1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1+1, col1-1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1, col1-1).getNearMines(), 1);
+
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"6, 7"})
+    void testSetCluesBottomRightCorner(int row1, int col1){
+        board.setClues(row1, col1);
+
+        assertEquals(board.getSquare(row1-1, col1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1, col1-1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1-1, col1-1).getNearMines(), 1);
+
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"6, 0"})
+    void testSetCluesBottomLeftCorner(int row1, int col1){
+        board.setClues(row1, col1);
+
+        assertEquals(board.getSquare(row1-1, col1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1-1, col1+1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1, col1+1).getNearMines(), 1);
+
+    }
+
 }

@@ -41,5 +41,5 @@ public class Board {
 
     public void createMines();
 
-    public void setClues();
+    public void setClues(int row, int col);
 }
