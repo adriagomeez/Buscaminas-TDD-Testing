@@ -40,6 +40,7 @@ public class Board {
     public void createBoard();
 
     public void createMines(RandomNumber randomNumber){
+        randomNumber.setSize(numRows, numCols);
         int generatedMines = 0;
         while (generatedMines != numMines){
             int row = randomNumber.getRandomRow();
