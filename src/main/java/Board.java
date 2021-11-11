@@ -38,6 +38,51 @@ public class Board {
     }
 
     public boolean selectSquare(int row, int col){
+        if(getSquare(row, col).isMine()) {
+            getSquare(row, col).setOpen();
+            return true;
+        }
+        else if(!getSquare(row, col).isOpen()){
+            getSquare(row, col).setOpen();
+            if (getSquare(row, col).getNearMines() == 0){
+                for (int i = 0; i < 8; i++) {
+                    int auxRow = row;
+                    int auxCol = col;
+                    switch (i) {
+                        case 0://topLeft
+                            auxRow--;
+                            auxCol--;
+                            break;
+                        case 1://top
+                            auxRow--;
+                            break;
+                        case 2://topRight
+                            auxRow--;
+                            auxCol++;
+                            break;
+                        case 3://right
+                            auxCol++;
+                            break;
+                        case 4://bottomRight
+                            auxRow++;
+                            auxCol++;
+                            break;
+                        case 5://bottom
+                            auxRow++;
+                            break;
+                        case 6://bottomLeft
+                            auxRow++;
+                            auxCol--;
+                            break;
+                        case 7://left
+                            auxCol--;
+                            break;
+                    }
+                    if (auxRow >= 0 && auxRow < numRows && auxCol >= 0 && auxCol < numCols)
+                        selectSquare(auxRow, auxCol);
+                }
+            }
+        }
         return false;
     }
 
