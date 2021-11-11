@@ -40,7 +40,16 @@ public class Board {
     public void createBoard();
 
     public void createMines(RandomNumber randomNumber){
-
+        int generatedMines = 0;
+        while (generatedMines != numMines){
+            int row = randomNumber.getRandomRow();
+            int col = randomNumber.getRandomCol();
+            if(!getSquare(row, col).isMine()) {
+                getSquare(row, col).setMine();
+                setClues(row, col);
+                generatedMines++;
+            }
+        }
     }
 
     public void setClues(int row, int col){
