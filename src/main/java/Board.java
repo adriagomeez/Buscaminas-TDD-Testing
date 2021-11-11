@@ -37,8 +37,8 @@ public class Board {
         return null;
     }
 
-    public void selectSquare(int row, int col){
-
+    public boolean selectSquare(int row, int col){
+        return false;
     }
 
     public void createMines(RandomNumber randomNumber){

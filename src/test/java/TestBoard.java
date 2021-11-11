@@ -266,6 +266,160 @@ public class TestBoard {
         assertTrue(b.getSquare(3, 2).isMine());
     }
 
+    @Test
+    void testSelectSquareConPistaZero(){
+        //creacion del tablero
+        Board tablero = new Board(5, 5, 3);
+        MockRandomNumber mockRandomNumber = new MockRandomNumber();
+        //mina 1
+        mockRandomNumber.setNum(2);
+        mockRandomNumber.setNum(2);
+        //mina 2
+        mockRandomNumber.setNum(2);
+        mockRandomNumber.setNum(4);
+        //mina 3
+        mockRandomNumber.setNum(4);
+        mockRandomNumber.setNum(0);
+
+        tablero.createMines(mockRandomNumber);
+        //square 1
+        boolean resultado = tablero.selectSquare(4, 3);
+        assertFalse(resultado);
+        //casillas abiertas
+        assertTrue(tablero.getSquare(4, 2).isOpen());
+        assertTrue(tablero.getSquare(4, 3).isOpen());
+        assertTrue(tablero.getSquare(4, 4).isOpen());
+        //casillas frontera con las abiertas pero cerradas
+        assertFalse(tablero.getSquare(4, 1).isOpen());
+        assertFalse(tablero.getSquare(3, 1).isOpen());
+        assertFalse(tablero.getSquare(3, 2).isOpen());
+        assertFalse(tablero.getSquare(3, 3).isOpen());
+        assertFalse(tablero.getSquare(3, 4).isOpen());
+
+        //square 2
+        resultado = tablero.selectSquare(0, 0);
+        assertFalse(resultado);
+        //casillas abiertas
+        assertTrue(tablero.getSquare(0, 0).isOpen());
+        assertTrue(tablero.getSquare(0, 1).isOpen());
+        assertTrue(tablero.getSquare(0, 2).isOpen());
+        assertTrue(tablero.getSquare(0, 3).isOpen());
+        assertTrue(tablero.getSquare(0, 4).isOpen());
+        assertTrue(tablero.getSquare(1, 0).isOpen());
+        assertTrue(tablero.getSquare(2, 0).isOpen());
+    }
+
+    @Test
+    void testSelectSquareConPistaDiferenteZero(){
+        //creacion del tablero
+        Board tablero = new Board(5, 5, 3);
+        MockRandomNumber mockRandomNumber = new MockRandomNumber();
+        //mina 1
+        mockRandomNumber.setNum(2);
+        mockRandomNumber.setNum(2);
+        //mina 2
+        mockRandomNumber.setNum(2);
+        mockRandomNumber.setNum(4);
+        //mina 3
+        mockRandomNumber.setNum(4);
+        mockRandomNumber.setNum(0);
+
+        tablero.createMines(mockRandomNumber);
+        //square 1
+        boolean resultado = tablero.selectSquare(1, 3);
+        assertFalse(resultado);
+        //casilla abierta
+        assertTrue(tablero.getSquare(1, 3).isOpen());
+        //casillas frontera con las abiertas pero cerradas
+        assertFalse(tablero.getSquare(0, 2).isOpen());
+        assertFalse(tablero.getSquare(0, 3).isOpen());
+        assertFalse(tablero.getSquare(0, 4).isOpen());
+        assertFalse(tablero.getSquare(1, 4).isOpen());
+        assertFalse(tablero.getSquare(2, 4).isOpen());
+        assertFalse(tablero.getSquare(2, 3).isOpen());
+        assertFalse(tablero.getSquare(2, 2).isOpen());
+        assertFalse(tablero.getSquare(1, 2).isOpen());
+
+        //square 2
+        resultado = tablero.selectSquare(3, 1);
+        assertFalse(resultado);
+        //casilla abierta
+        assertTrue(tablero.getSquare(3, 1).isOpen());
+        //casillas frontera con las abiertas pero cerradas
+        assertFalse(tablero.getSquare(2, 0).isOpen());
+        assertFalse(tablero.getSquare(2, 1).isOpen());
+        assertFalse(tablero.getSquare(2, 2).isOpen());
+        assertFalse(tablero.getSquare(3, 2).isOpen());
+        assertFalse(tablero.getSquare(4, 2).isOpen());
+        assertFalse(tablero.getSquare(4, 1).isOpen());
+        assertFalse(tablero.getSquare(4, 0).isOpen());
+        assertFalse(tablero.getSquare(3, 0).isOpen());
+    }
+
+    @Test
+    void testSelectSquareCasillaAbierta(){
+        //creacion del tablero
+        Board tablero = new Board(5, 5, 3);
+        MockRandomNumber mockRandomNumber = new MockRandomNumber();
+        //mina 1
+        mockRandomNumber.setNum(2);
+        mockRandomNumber.setNum(2);
+        //mina 2
+        mockRandomNumber.setNum(2);
+        mockRandomNumber.setNum(4);
+        //mina 3
+        mockRandomNumber.setNum(4);
+        mockRandomNumber.setNum(0);
+
+        tablero.createMines(mockRandomNumber);
+        //abrir casilla
+        boolean resultado = tablero.selectSquare(4, 3);
+        //seleccionar misma casilla
+        resultado = tablero.selectSquare(4, 3);
+        assertFalse(resultado);
+        //casillas abiertas anteriormente siguen abiertas
+        assertTrue(tablero.getSquare(4, 2).isOpen());
+        assertTrue(tablero.getSquare(4, 3).isOpen());
+        assertTrue(tablero.getSquare(4, 4).isOpen());
+        //casillas frontera con las abiertas pero cerradas siguen cerradas
+        assertFalse(tablero.getSquare(4, 1).isOpen());
+        assertFalse(tablero.getSquare(3, 1).isOpen());
+        assertFalse(tablero.getSquare(3, 2).isOpen());
+        assertFalse(tablero.getSquare(3, 3).isOpen());
+        assertFalse(tablero.getSquare(3, 4).isOpen());
+    }
+
+    @Test
+    void testSelectSquareConMina(){
+        //creacion del tablero
+        Board tablero = new Board(5, 5, 3);
+        MockRandomNumber mockRandomNumber = new MockRandomNumber();
+        //mina 1
+        mockRandomNumber.setNum(2);
+        mockRandomNumber.setNum(2);
+        //mina 2
+        mockRandomNumber.setNum(2);
+        mockRandomNumber.setNum(4);
+        //mina 3
+        mockRandomNumber.setNum(4);
+        mockRandomNumber.setNum(0);
+
+        tablero.createMines(mockRandomNumber);
+        //abrir casilla
+        boolean resultado = tablero.selectSquare(2, 2);
+        assertTrue(resultado);
+        //casilla abierta
+        assertTrue(tablero.getSquare(2, 2).isOpen());
+        //casillas frontera con las abiertas pero cerradas
+        assertFalse(tablero.getSquare(1, 1).isOpen());
+        assertFalse(tablero.getSquare(1, 2).isOpen());
+        assertFalse(tablero.getSquare(1, 3).isOpen());
+        assertFalse(tablero.getSquare(2, 3).isOpen());
+        assertFalse(tablero.getSquare(3, 3).isOpen());
+        assertFalse(tablero.getSquare(3, 2).isOpen());
+        assertFalse(tablero.getSquare(3, 1).isOpen());
+        assertFalse(tablero.getSquare(2, 1).isOpen());
+    }
 
 
 }
