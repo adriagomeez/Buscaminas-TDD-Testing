@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -6,6 +7,7 @@ public class TestSquare {
 
     Square square;
 
+    @BeforeEach
     protected void setUp(){
         square = new Square(4,3);
     }

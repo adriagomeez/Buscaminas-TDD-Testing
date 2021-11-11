@@ -37,7 +37,9 @@ public class Board {
         return null;
     }
 
-    public void createBoard();
+    public void selectSquare(int row, int col){
+
+    }
 
     public void createMines(RandomNumber randomNumber){
         randomNumber.setSize(numRows, numCols);

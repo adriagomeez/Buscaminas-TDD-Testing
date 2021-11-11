@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -8,6 +9,7 @@ public class TestBoard {
 
     Board board;
 
+    @BeforeEach
     protected void setUp(){
         board = new Board( 7, 8, 1);
     }
@@ -60,7 +62,7 @@ public class TestBoard {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"5, 5", "3, 5", "2, 4", "4, 3"})
+    @CsvSource(value = {"4, 5", "3, 5", "2, 4", "4, 3"})
     void testSetCluesInterior(int row, int col){
         board.setClues(row, col);
         //casillas con pista
@@ -80,10 +82,10 @@ public class TestBoard {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"5, 5", "3, 5"})
+    @CsvSource(value = {"5, 5, 3, 5"})
     void testSetCluesDosMinas(int row1, int col1, int row2, int col2){
         board.setClues(row1, col1);
-        //casillas con pista
+        //una mina
         assertEquals(board.getSquare(row1-1, col1).getNearMines(), 1);
         assertEquals(board.getSquare(row1-1, col1+1).getNearMines(), 1);
         assertEquals(board.getSquare(row1, col1+1).getNearMines(), 1);
@@ -92,21 +94,17 @@ public class TestBoard {
         assertEquals(board.getSquare(row1+1, col1-1).getNearMines(), 1);
         assertEquals(board.getSquare(row1, col1-1).getNearMines(), 1);
         assertEquals(board.getSquare(row1-1, col1-1).getNearMines(), 1);
-        //casillas sin pista
-        assertEquals(board.getSquare(row1+2, col1).getNearMines(), 0);
-        assertEquals(board.getSquare(row1, col1+2).getNearMines(), 0);
-        assertEquals(board.getSquare(row1, col1-2).getNearMines(), 0);
-        assertEquals(board.getSquare(row1-2, col1).getNearMines(), 0);
 
         board.setClues(row2, col2);
-        assertEquals(board.getSquare(row1-1, col1).getNearMines(), 1);
-        assertEquals(board.getSquare(row1-1, col1+1).getNearMines(), 1);
+        //dos minas
+        assertEquals(board.getSquare(row1-1, col1).getNearMines(), 2);
+        assertEquals(board.getSquare(row1-1, col1+1).getNearMines(), 2);
         assertEquals(board.getSquare(row1, col1+1).getNearMines(), 1);
-        assertEquals(board.getSquare(row1+1, col1+1).getNearMines(), 2);
-        assertEquals(board.getSquare(row1+1, col1).getNearMines(), 2);
-        assertEquals(board.getSquare(row1+1, col1-1).getNearMines(), 2);
+        assertEquals(board.getSquare(row1+1, col1+1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1+1, col1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1+1, col1-1).getNearMines(), 1);
         assertEquals(board.getSquare(row1, col1-1).getNearMines(), 1);
-        assertEquals(board.getSquare(row1-1, col1-1).getNearMines(), 1);
+        assertEquals(board.getSquare(row1-1, col1-1).getNearMines(), 2);
     }
 
     @ParameterizedTest
