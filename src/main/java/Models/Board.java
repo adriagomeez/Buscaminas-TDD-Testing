@@ -21,8 +21,11 @@ public class Board {
         }
     }
 
-    public static Board getInstance(){
-
+    public static Board getInstance(int rows, int cols, int mines){
+        if(instance == null){
+            instance = new Board(rows, cols, mines);
+        }
+        return instance;
     }
 
     public int getNumCols(){
