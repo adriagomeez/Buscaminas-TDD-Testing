@@ -1,3 +1,5 @@
+package Models;
+
 public class Square {
 
     private int row;

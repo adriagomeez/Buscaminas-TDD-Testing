@@ -1,9 +1,12 @@
+package Models;
+
 public class Board {
 
     private int numRows;
     private int numCols;
     private int numMines;
     private Square[][] board;
+    private static Board instance;
 
     public Board(int rows, int cols, int mines){
         numRows = rows;
@@ -16,6 +19,10 @@ public class Board {
                 board[i][j] = new Square(i, j);
             }
         }
+    }
+
+    public static Board getInstance(){
+
     }
 
     public int getNumCols(){

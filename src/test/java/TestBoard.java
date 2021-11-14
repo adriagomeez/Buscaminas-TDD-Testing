@@ -1,3 +1,6 @@
+import MockObjects.MockRandomNumber;
+import Models.Board;
+import Models.Square;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -36,6 +39,13 @@ public class TestBoard {
         assertEquals(boardConstruct.getNumCols(), 15);
         assertEquals(boardConstruct.getNumMines(), 7);
 
+    }
+
+    @Test
+    void testGetInstance(){
+        Board b1 = Board.getInstance(4, 4, 2);
+        Board b2 = Board.getInstance(4, 5, 1);
+        assertEquals(b1, b2);
     }
 
     @ParameterizedTest

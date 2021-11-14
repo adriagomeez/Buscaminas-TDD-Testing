@@ -1,7 +1,11 @@
+package MockObjects;
+
+import Models.RandomNumber;
+
 import java.util.LinkedList;
 import java.util.List;
 
-public class MockRandomNumber extends RandomNumber{
+public class MockRandomNumber extends RandomNumber {
 
     private List<Integer> num;
 
