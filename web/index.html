@@ -5,15 +5,26 @@
     <title>Buscaminas</title>
 </head>
 <body>
-<!-- header -->
 <div>
     <h1>Buscaminas</h1>
 </div>
 
-<div>
+<div id="container">
     <div>
-        <button onclick="location.href='/list'">Easy</button>
+        <button id="easy">Easy</button>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+    (function ($){
+        $.ajax({
+            url: "/EasyServlet",
+            success:function(result) {
+                //$("#container").html(result);
+                console.log("respone");
+            }});
+    })(jQuery);
+</script>
 </body>
 </html>

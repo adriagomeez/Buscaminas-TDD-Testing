@@ -61,10 +61,10 @@ public class TestBoard {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"0, -1", "-1, 0", "-1, -1", "-1, 4", "-4, 6",//Esquina superior izquierda y arriba
-    "0, 8", "-1, 7", "-1, 8", "4, 8", "4, 10",//Esquina superior derecha y derecha
-    "6, 8", "7, 7", "7, 8", "7, 4", "9, 4",//Esquina inferior derecha y abajo
-    "7, 0", "6, -1", "7, -1", "4, -1", "4, -4"})//Esquina inferior izquierda y izquierda
+    @CsvSource(value = {"-1, -1", "-1, 0", "-1, 1", "-1, 2", "-1, 3", "-1, 4", "-1, 5", "-1, 6", "-1, 7", "-1, 8", "-3, 4", "-4, 6",//frontera primera fila y valors aislados
+    "-1, 8", "0, 8", "1, 8", "2, 8", "3, 8", "4, 8", "5, 8", "6, 8", "7, 8", "2, 9", "4, 10",//frontera columna derecha y valores aislados
+    "7, -1", "7, 0", "7, 1", "7, 2", "7, 3", "7, 4", "7, 5", "7, 6", "7, 7",  "9, 4", "10, 6",//frontera ultima fila y valores aislados
+    "1, -1", "2, -1", "3, -1", "4, -1", "5, -1", "6, -1", "4, -5", "6, -4"})//frontera columna izquierda y valores aislados
     void testGetSquareExterior(int row, int col){
         Square testSquere = board.getSquare(row, col);
         assertNull(testSquere);
@@ -214,6 +214,86 @@ public class TestBoard {
     }
 
     @ParameterizedTest
+    @CsvSource(value = {"1, -1", "2, -1", "3, -1", "4, -1", "5, -1"})
+    void testSetCluesLeftBorderExterior(int row, int col){
+        board.setClues(row, col);
+
+        assertEquals(board.getSquare(row-1, col+1).getNearMines(), 0);
+        assertEquals(board.getSquare(row, col+1).getNearMines(), 0);
+        assertEquals(board.getSquare(row+1, col+1).getNearMines(), 0);
+
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"-1, 1", "-1, 2", "-1, 3", "-1, 4", "-1, 5", "-1, 6"})
+    void testSetCluesTopBorderExterior(int row, int col){
+        board.setClues(row, col);
+
+        assertEquals(board.getSquare(row+1, col+1).getNearMines(), 0);
+        assertEquals(board.getSquare(row+1, col).getNearMines(), 0);
+        assertEquals(board.getSquare(row+1, col-1).getNearMines(), 0);
+
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1, 8", "2, 8", "3, 8", "4, 8", "5, 8"})
+    void testSetCluesRightBorderExterior(int row, int col){
+        board.setClues(row, col);
+
+        assertEquals(board.getSquare(row+1, col-1).getNearMines(), 0);
+        assertEquals(board.getSquare(row, col-1).getNearMines(), 0);
+        assertEquals(board.getSquare(row-1, col-1).getNearMines(), 0);
+
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"7, 1", "7, 2", "7, 3", "7, 4", "7, 5", "7, 6"})
+    void testSetCluesBottomBorderExterior(int row, int col){
+        board.setClues(row, col);
+
+        assertEquals(board.getSquare(row-1, col+1).getNearMines(), 0);
+        assertEquals(board.getSquare(row-1, col).getNearMines(), 0);
+        assertEquals(board.getSquare(row-1, col-1).getNearMines(), 0);
+
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"-1, 0", "-1, -1", "0, -1"})
+    void testSetCluesTopLeftCornerExterior(int row, int col){
+        board.setClues(row, col);
+
+        assertEquals(board.getSquare(0, 0).getNearMines(), 0);
+
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"-1, 7", "-1, 8", "0, 8"})
+    void testSetCluesTopRightCornerExterior(int row, int col){
+        board.setClues(row, col);
+
+        assertEquals(board.getSquare(0, 7).getNearMines(), 0);
+
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"6, 8", "7, 8", "7, 7"})
+    void testSetCluesBottomRightCornerExterior(int row, int col){
+        board.setClues(row, col);
+
+        assertEquals(board.getSquare(6, 7).getNearMines(), 0);
+
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"6, -1", "7, -1", "7, 0"})
+    void testSetCluesBottomLeftCornerExterior(int row, int col){
+        board.setClues(row, col);
+
+        assertEquals(board.getSquare(6, 0).getNearMines(), 0);
+
+    }
+
+    @ParameterizedTest
     @CsvSource(value = {"2, 3", "4, 1", "5, 6", "1, 7", "3, 4",
             "0, 0", "0, 1", "0, 2", "0, 3", "0, 4", "0, 5", "0, 6", "0, 7", //frontera primera fila
             "1, 7", "2, 7", "3, 7", "4, 7", "5, 7", "6, 7", //frontera ultima columna
@@ -228,6 +308,26 @@ public class TestBoard {
         board.createMines(mockRandomNumber);
 
         assertTrue(board.getSquare(row, col).isMine());
+
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"-1, -1", "-1, 0", "-1, 1", "-1, 2", "-1, 3", "-1, 4", "-1, 5", "-1, 6", "-1, 7", "-1, 8", "-3, 4", "-4, 6",//frontera primera fila y valors aislados
+            "-1, 8", "0, 8", "1, 8", "2, 8", "3, 8", "4, 8", "5, 8", "6, 8", "7, 8", "2, 9", "4, 10",//frontera columna derecha y valores aislados
+            "7, -1", "7, 0", "7, 1", "7, 2", "7, 3", "7, 4", "7, 5", "7, 6", "7, 7",  "9, 4", "10, 6",//frontera ultima fila y valores aislados
+            "1, -1", "2, -1", "3, -1", "4, -1", "5, -1", "6, -1", "4, -5", "6, -4"})//frontera columna izquierda y valores aislados
+    void testCreateMinesExteriorYBordeExterior(int row, int col){
+        MockRandomNumber mockRandomNumber = new MockRandomNumber();
+
+        mockRandomNumber.setNum(row);
+        mockRandomNumber.setNum(col);
+
+        mockRandomNumber.setNum(1);
+        mockRandomNumber.setNum(1);
+
+        board.createMines(mockRandomNumber);
+
+        assertTrue(board.getSquare(1, 1).isMine());
 
     }
 

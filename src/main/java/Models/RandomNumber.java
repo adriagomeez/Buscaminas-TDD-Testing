@@ -1,6 +1,5 @@
 package Models;
 
-import java.math.*;
 public class RandomNumber {
 
     private int rows;

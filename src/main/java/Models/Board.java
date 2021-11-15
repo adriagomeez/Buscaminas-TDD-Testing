@@ -102,7 +102,7 @@ public class Board {
         while (generatedMines != numMines){
             int row = randomNumber.getRandomRow();
             int col = randomNumber.getRandomCol();
-            if(!getSquare(row, col).isMine()) {
+            if(!getSquare(row, col).isMine() || (row >= 0 && row < numRows && col >= 0 && col <numCols)) {
                 getSquare(row, col).setMine();
                 setClues(row, col);
                 generatedMines++;
@@ -111,41 +111,43 @@ public class Board {
     }
 
     public void setClues(int row, int col){
-        for (int i = 0; i < 8; i++){
-            int auxRow = row;
-            int auxCol = col;
-            switch (i){
-                case 0://topLeft
-                    auxRow--;
-                    auxCol--;
-                    break;
-                case 1://top
-                    auxRow--;
-                    break;
-                case 2://topRight
-                    auxRow--;
-                    auxCol++;
-                    break;
-                case 3://right
-                    auxCol++;
-                    break;
-                case 4://bottomRight
-                    auxRow++;
-                    auxCol++;
-                    break;
-                case 5://bottom
-                    auxRow++;
-                    break;
-                case 6://bottomLeft
-                    auxRow++;
-                    auxCol--;
-                    break;
-                case 7://left
-                    auxCol--;
-                    break;
+        if(row >= 0 && row < numRows && col >= 0 && col <numCols) {
+            for (int i = 0; i < 8; i++) {
+                int auxRow = row;
+                int auxCol = col;
+                switch (i) {
+                    case 0://topLeft
+                        auxRow--;
+                        auxCol--;
+                        break;
+                    case 1://top
+                        auxRow--;
+                        break;
+                    case 2://topRight
+                        auxRow--;
+                        auxCol++;
+                        break;
+                    case 3://right
+                        auxCol++;
+                        break;
+                    case 4://bottomRight
+                        auxRow++;
+                        auxCol++;
+                        break;
+                    case 5://bottom
+                        auxRow++;
+                        break;
+                    case 6://bottomLeft
+                        auxRow++;
+                        auxCol--;
+                        break;
+                    case 7://left
+                        auxCol--;
+                        break;
+                }
+                if (auxRow >= 0 && auxRow < numRows && auxCol >= 0 && auxCol < numCols)
+                    board[auxRow][auxCol].increaseNearMines();
             }
-            if( auxRow >= 0 && auxRow < numRows && auxCol >= 0 && auxCol <numCols)
-                board[auxRow][auxCol].increaseNearMines();
         }
     }
 }
