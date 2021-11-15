@@ -16,10 +16,12 @@ public class RandomNumber {
     }
 
     public int getRandomRow(){
-        return (int)Math.random()*rows;
+        int a = (int)(Math.random()*rows);
+        return a;
     }
 
     public int getRandomCol(){
-        return (int)Math.random()*cols;
+        int a = (int)(Math.random()*cols);
+        return a;
     }
 }

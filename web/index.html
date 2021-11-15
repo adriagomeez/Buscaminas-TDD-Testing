@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Buscaminas</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="functions.js"></script>
 </head>
 <body>
 <div>
@@ -12,19 +14,20 @@
 <div id="container">
     <div>
         <button id="easy">Easy</button>
+        <button id="medium">Medium</button>
+        <button id="hard">Hard</button>
     </div>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script>
-    (function ($){
-        $.ajax({
-            url: "/EasyServlet",
-            success:function(result) {
-                //$("#container").html(result);
-                console.log("respone");
-            }});
-    })(jQuery);
-</script>
+<style>
+    .casilla{
+        width: 25px;
+        height: 25px;
+        background-color: lightgray;
+        padding: 2px 2px 2px 2px;
+    }
+    #abierta{
+        background-color: beige;
+    }
+</style>
 </body>
 </html>

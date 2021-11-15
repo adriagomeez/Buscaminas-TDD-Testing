@@ -102,7 +102,7 @@ public class Board {
         while (generatedMines != numMines){
             int row = randomNumber.getRandomRow();
             int col = randomNumber.getRandomCol();
-            if(!getSquare(row, col).isMine() || (row >= 0 && row < numRows && col >= 0 && col <numCols)) {
+            if(!getSquare(row, col).isMine() && (row >= 0 && row < numRows && col >= 0 && col <numCols)) {
                 getSquare(row, col).setMine();
                 setClues(row, col);
                 generatedMines++;
